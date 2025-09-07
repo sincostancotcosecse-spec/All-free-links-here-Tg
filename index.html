@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ফ্রি টেলিগ্রাম গ্রুপ হেয়ার</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 30px 10px;
+  }
+  .container {
+    text-align: center;
+    max-width: 500px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .container h2 {
+    margin-top: 0;
+  }
+  .container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  #showGroupsBtn {
+    background: #ff9800;
+    color: #fff;
+  }
+  .group-box {
+    background: #eee;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .group-box button {
+    padding: 5px 15px;
+    border-radius: 20px;
+    background: #2575fc;
+    color: #fff;
+  }
+  #flowContainer {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+    background: rgba(0,0,0,0.05);
+    padding: 20px;
+    border-radius: 15px;
+  }
+  #timer {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ff9800;
+    margin-top: 10px;
+  }
+  #nextBtn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: #ff5722;
+    color: #fff;
+    margin-top: 10px;
+  }
+  a button {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #adContainer iframe {
+    width: 100%;
+    max-width: 300px;
+    height: 250px;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>ফ্রি টেলিগ্রাম গ্রুপ হেয়ার</h2>
+  <p>নিচের বাটনে ক্লিক করলে গ্রুপ লিস্ট দেখা যাবে।</p>
+
+  <button id="showGroupsBtn" onclick="showGroups()">এড দেখুন</button>
+
+  <!-- Adsterra Ads iframe placeholder -->
+  <div id="adContainer" style="margin:15px 0;">
+    <!-- এখানে Adsterra iframe/embed code দিন -->
+    <iframe src="YOUR_ADSTERRA_IFRAME_LINK" width="300" height="250"></iframe>
+  </div>
+
+  <!-- Group List -->
+  <div id="groupList" style="display:none; margin-top:15px;">
+    <div class="group-box">
+      <strong>গ্রুপ ১</strong>
+      <p>💬 টেকনোলজি ও টিপস গ্রুপ।</p>
+      <button onclick="startFlow(1)">জয়েন নাও</button>
+    </div>
+    <div class="group-box">
+      <strong>গ্রুপ ২</strong>
+      <p>📢 খবর ও আপডেটস শেয়ার করা হয়।</p>
+      <button onclick="startFlow(2)">জয়েন নাও</button>
+    </div>
+  </div>
+
+  <!-- Steps Flow -->
+  <div id="flowContainer">
+    <h3 id="stepTitle">ধাপ ১</h3>
+    <p id="stepNote">👉 এখানে প্রথম ধাপের নোট থাকবে।</p>
+    <div id="timer">10</div>
+    <button id="nextBtn" onclick="nextStep()" style="display:none;">পরবর্তী ধাপ</button>
+  </div>
+
+</div>
+
+<script>
+  var steps = [
+    {title:"ধাপ ১", note:"👉 এখানে প্রথম ধাপের নোট থাকবে।"},
+    {title:"ধাপ ২", note:"📌 এখানে দ্বিতীয় ধাপের নোট থাকবে।"},
+    {title:"ধাপ ৩", note:"🔑 এখানে তৃতীয় ধাপের নোট থাকবে।"},
+    {title:"ধাপ ৪", note:"✅ এখানে চতুর্থ ধাপের নোট থাকবে।"}
+  ];
+
+  var currentStep = 0;
+  var countdown;
+
+  function showGroups(){
+    document.getElementById("groupList").style.display = "block";
+  }
+
+  function startFlow(groupId){
+    document.getElementById("groupList").style.display = "none";
+    document.getElementById("flowContainer").style.display = "block";
+    currentStep = 0;
+    loadStep();
+  }
+
+  function loadStep(){
+    document.getElementById("stepTitle").innerText = steps[currentStep].title;
+    document.getElementById("stepNote").innerText = steps[currentStep].note;
+    startTimer();
+  }
+
+  function startTimer(){
+    var timeLeft = 10;
+    document.getElementById("timer").innerText = timeLeft;
+    document.getElementById("nextBtn").style.display = "none";
+
+    countdown = setInterval(function(){
+      timeLeft--;
+      document.getElementById("timer").innerText = timeLeft;
+      if(timeLeft <= 0){
+        clearInterval(countdown);
+        document.getElementById("nextBtn").style.display = "inline-block";
+      }
+    }, 1000);
+  }
+
+  function nextStep(){
+    currentStep++;
+    if(currentStep < steps.length){
+      loadStep();
+    } else {
+      document.getElementById("flowContainer").innerHTML = '<h3>🎉 সব ধাপ শেষ!</h3><p>এখন আপনি গ্রুপে যোগ দিতে পারবেন।</p><a href="https://t.me/yourgroup" target="_blank"><button>গ্রুপে যান</button></a>';
+    }
+  }
+</script>
+
+</body>
+</html>
